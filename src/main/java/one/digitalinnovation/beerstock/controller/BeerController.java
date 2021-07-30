@@ -2,6 +2,7 @@ package one.digitalinnovation.beerstock.controller;
 
 import lombok.AllArgsConstructor;
 import one.digitalinnovation.beerstock.dto.BeerDTO;
+import one.digitalinnovation.beerstock.dto.MaxDTO;
 import one.digitalinnovation.beerstock.dto.QuantityDTO;
 import one.digitalinnovation.beerstock.exception.BeerAlreadyRegisteredException;
 import one.digitalinnovation.beerstock.exception.BeerNotFoundException;
@@ -58,8 +59,8 @@ public class BeerController implements BeerControllerDocs {
     }
 
     @PatchMapping("/{id}/changeMaxCapacity")
-    public BeerDTO changeMaxCapacity(@PathVariable Long id,@RequestBody int newMaxCapacity) throws BeerNotFoundException {
-        return beerService.changeMaxCapacity(id, newMaxCapacity);
+    public BeerDTO changeMaxCapacity(@PathVariable Long id, @RequestBody @Valid MaxDTO newMaxDTO) throws BeerNotFoundException {
+        return beerService.changeMaxCapacity(id, newMaxDTO.getNewMax());
     }
 
 }
